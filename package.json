@@ -2,13 +2,18 @@
   "name": "electron-vue-starter",
   "version": "0.1.0",
   "private": true,
+  "main": "electron/main.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "demo-args": "electron . --dev --url=http://localhost:8080",
+    "electron-start": "electron .",
+    "dev": "node electron/launcher.js"
   },
   "dependencies": {
     "core-js": "^2.6.5",
+    "electron": "^4.1.4",
     "vue": "^2.6.10",
     "vuex": "^3.0.1"
   },
