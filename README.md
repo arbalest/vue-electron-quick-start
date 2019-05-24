@@ -12,6 +12,13 @@ same terminal using a single command.
 This project can be used either by cloning it and using it as a starting point for a project,
 or by copying the `dev` and `electron-start` entries from the `package.json` scripts section, and copying the `./electron` folder into your own existing project.
 
+## Additional Notes
+
+When using a project based on vue-cli with Electron, in order to load Electron NodeJS modules using Electron's require,
+rather than Webpack's loader, we should use `window.require`, e.g.
+
+`const fs = window.require('fs');`
+
 ## Run for Development
 
 To run the project for development:
