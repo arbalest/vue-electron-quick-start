@@ -20,6 +20,8 @@ const TextColors = {
 	Reset:       '\033[0:0m',
 };
 
+let hasLaunchedElectron = false;
+
 let printTaggedText = function(tag, text, tagColor, txtColor) {
 	console.log(`${tagColor}[${tag}]${txtColor}${text}${TextColors.Reset}`);
 };
@@ -55,13 +57,14 @@ let vueProcConfig = {
 	onData: (data) => {
 		// Look for Vue to tell us the server has started with a local url 
 		// before we kick off the Electron process...
-		if (data.toString().includes('- Local:')) {
+		if (!hasLaunchedElectron && data.toString().includes('- Local:')) {
 			// Look for the url and port that Vue is using for its dev server
 			let matches = data.toString().match(/- Local\:\s+(http:\/\/.*?\:\d+)/);
 
 			// Pass the dev server url as an argument to our Electron main.js
 			electronProcConfig.args.push('--url=' + matches[1]);
 			launchProc(electronProcConfig);
+      hasLaunchedElectron = true;
 		}
 	},
 	onExit: (code) => {}
